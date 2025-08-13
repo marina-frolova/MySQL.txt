@@ -1,0 +1,26 @@
+1. use qa_shop
+2. db.createCollection("card_info")
+3. db.card_info.insertMany([
+  { id: 1, card_type: ""VISA"", status: ""valid"", expiry_month: 12 },
+  { id: 2, card_type: ""MasterCard"", status: ""valid"", expiry_month: 5 },
+  { id: 3, card_type: ""VISA"", status: ""invalid"", expiry_month: 8 },
+  { id: 4, card_type: ""VISA"", status: ""valid"", expiry_month: 4 },
+  { id: 5, card_type: ""Discover"", status: ""valid"", expiry_month: 11 },
+  { id: 6, card_type: ""MasterCard"", status: ""invalid"", expiry_month: 7 }
+])
+4. db.card_info.find(
+  { status: ""valid"" }, 
+  { id: 1, card_type: 1, _id: 0 }
+)
+5. db.card_info.find(
+  { expiry_month: { $gt: 6 } }, 
+  { id: 1, card_type: 1, _id: 0 }
+)
+6. db.card_info.find(
+  { expiry_month: { $gt: 5, $lt: 11 } }, 
+  { id: 1, card_type: 1, _id: 0 }
+)
+7. db.card_info.countDocuments({ card_type: "VISA" })
+8. db.card_info.find(
+  { card_type: { $regex: /r/, $options: ""i"" } }
+)
